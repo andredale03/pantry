@@ -33,7 +33,7 @@ export default function ExpiringModal({ products, onClose }) {
     try {
       const names = selectedProducts.map(p => p.name);
 
-      const response = await fetch('/.netlify/functions/suggest-recipes', {
+      const response = await fetch('/api/suggest-recipes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ingredients: names })
@@ -87,8 +87,8 @@ export default function ExpiringModal({ products, onClose }) {
                         key={p.id}
                         onClick={() => toggleProduct(p.id)}
                         className={`flex items-center justify-between p-3 mb-2 rounded-xl cursor-pointer transition-all border ${isSelected
-                            ? 'bg-white dark:bg-gray-800 border-red-200 dark:border-red-900 shadow-sm'
-                            : 'bg-transparent border-transparent opacity-60 hover:opacity-100'
+                          ? 'bg-white dark:bg-gray-800 border-red-200 dark:border-red-900 shadow-sm'
+                          : 'bg-transparent border-transparent opacity-60 hover:opacity-100'
                           }`}
                       >
                         <div className="flex items-center gap-3">
