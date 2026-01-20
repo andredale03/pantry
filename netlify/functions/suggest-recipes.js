@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: (process.env.OPENAI_API_KEY || '').trim()
 });
 
 export default async (req) => {
@@ -36,7 +36,8 @@ export default async (req) => {
     const result = completion.choices[0].message.content;
     return new Response(result, { headers: { "Content-Type": "application/json" } });
 
-  } catch (error) {
+} catch (error) {
+    console.error("ERRORE DETTAGLIATO:", error); // <--- AGGIUNGI QUESTA RIGA
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 };
